@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BurakSekmen.Core.UnitOfWorks;
+﻿using BurakSekmen.Core.UnitOfWorks;
 using BurakSekmen.Repository.Context;
 
 namespace BurakSekmen.Repository.UnitOfWorks

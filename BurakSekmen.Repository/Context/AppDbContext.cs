@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using BurakSekmen.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BurakSekmen.Repository.Context
@@ -13,6 +10,22 @@ namespace BurakSekmen.Repository.Context
         {
             
         }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }  
+        public DbSet<Sales> Sales { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+        
+
+       
 
 
     }
