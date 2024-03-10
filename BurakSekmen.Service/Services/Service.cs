@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using BurakSekmen.Core.Repository;
+﻿using BurakSekmen.Core.Repository;
 using BurakSekmen.Core.Services;
 using BurakSekmen.Core.UnitOfWorks;
 using BurakSekmen.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BurakSekmen.Service.Services
 {

@@ -21,6 +21,13 @@ namespace BurakSekmen.API.Controllers
             _productService = productService;
         }
 
+        [HttpGet("GetProductWithCategories")]
+        public async Task<IActionResult> GetProductWithCategories()
+        {
+            return CreateActionResult(await _productService.GetProductsWithCategory());
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
