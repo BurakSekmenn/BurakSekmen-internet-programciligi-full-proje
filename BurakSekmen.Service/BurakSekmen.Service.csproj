@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BurakSekmen.Repository\BurakSekmen.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validations\" />
+  </ItemGroup>
+
 </Project>
