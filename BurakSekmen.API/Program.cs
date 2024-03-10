@@ -27,7 +27,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });// ModelStateInvalidFilter'ý devre dýþý býrakýr.
 
-
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -48,11 +49,11 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 
 
 
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped(typeof(NotFoundFilter<>));
-builder.Services.AddAutoMapper(typeof(MapProfile));
+
 
 var app = builder.Build();
 

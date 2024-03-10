@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BurakSekmen.Core.Repository;
 using BurakSekmen.Core.Services;
 using BurakSekmen.Core.UnitOfWorks;
+using BurakSekmen.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BurakSekmen.Service.Services
@@ -23,8 +24,15 @@ namespace BurakSekmen.Service.Services
         }
 
         public async Task<T> GetByIdAsync(int id)
-        { 
-            return await _genericRepository.GetByIdAsync(id);
+        {
+            var datacontrol = await _genericRepository.GetByIdAsync(id);
+
+            if (datacontrol == null)
+            {
+                throw new NotFoundExecption($"{typeof(T).Name}({id}) Not Found");
+            }
+
+            return datacontrol;
         }
 
         public IQueryable<T> GetAll()

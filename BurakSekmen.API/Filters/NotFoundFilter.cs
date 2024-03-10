@@ -31,13 +31,13 @@ namespace BurakSekmen.API.Filters
            var anyEntity = await _service.AnyAsync(x => x.Id == id);
 
 
-           if (!anyEntity)
+           if (anyEntity)
            {
-               await next.Invoke();
+                await next.Invoke();
                 return;
            }
 
-           context.Result = new NotFoundObjectResult(CustomeResponseDto<T>.Fail($"{typeof(T).Name}({id}) Not Found", 404));
+           context.Result = new NotFoundObjectResult(CustomeResponseDto<NoContentDto>.Fail($"{typeof(T).Name}({id}) Not Found", 404));
 
 
            throw new NotImplementedException();
