@@ -20,7 +20,7 @@ namespace BurakSekmen.API.Modules
                 .InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>))
                 .InstancePerLifetimeScope();
-            builder.RegisterType<IUnitOfWorks>().As<IUnitOfWorks>();
+            builder.RegisterType<UnitOfWorks>().As<IUnitOfWorks>();
 
             var ApiAssembly = Assembly.GetExecutingAssembly();
 

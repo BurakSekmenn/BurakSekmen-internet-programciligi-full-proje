@@ -63,7 +63,9 @@ namespace BurakSekmen.Service.Services
 
         public async Task UpdateAsync(T entity)
         {
+             
              _genericRepository.Update(entity);
+             entity.GetType().GetProperty("ModifiedDate").SetValue(entity, DateTime.Now);
              await _unitOfWorks.CommitAsync();
         }
 

@@ -11,6 +11,11 @@ namespace BurakSekmen.Repository.Repositories
         private readonly DbSet<T> _dbSet;
 
 
+        public GenericRepository(AppDbContext context)
+        {
+            _context = context;
+            _dbSet = _context.Set<T>();
+        }
 
         public async Task<T> GetByIdAsync(int id)
         {

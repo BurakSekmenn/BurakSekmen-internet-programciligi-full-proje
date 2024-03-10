@@ -18,6 +18,7 @@ namespace BurakSekmen.Service.Mapping
             CreateMap<ProductFeature,ProductFeatureDto>().ReverseMap();
             CreateMap<Person, PersonDto>().ReverseMap();
             CreateMap<Sales,SalesDto>().ReverseMap();
+            CreateMap<Product, ProductDto>();
 
         }
     }
