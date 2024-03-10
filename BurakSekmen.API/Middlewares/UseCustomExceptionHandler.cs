@@ -8,7 +8,7 @@ namespace BurakSekmen.API.Middlewares
     public static class UseCustomExceptionHandler
     {
 
-        public static IApplicationBuilder UseCustomException(this IApplicationBuilder app)
+        public static void  UseCustomException(this IApplicationBuilder app)
         {
 
             app.UseExceptionHandler(configure =>
@@ -35,14 +35,7 @@ namespace BurakSekmen.API.Middlewares
                     });
                 }
             );
-
-
-
-
-
          
         }
-
-
     }
 }

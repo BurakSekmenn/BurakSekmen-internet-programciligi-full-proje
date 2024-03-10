@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BurakSekmen.API.Filters;
+using BurakSekmen.API.Middlewares;
 using BurakSekmen.API.Modules;
 using BurakSekmen.Repository.Context;
 using BurakSekmen.Service.Mapping;
@@ -61,7 +62,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCustomException();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
