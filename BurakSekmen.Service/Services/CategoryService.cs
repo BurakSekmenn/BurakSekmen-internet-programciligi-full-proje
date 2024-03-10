@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Repository;
 using BurakSekmen.Core.Services;
@@ -19,6 +20,17 @@ namespace BurakSekmen.Service.Services
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+        }
+
+        public async Task<CustomeResponseDto<CategoryWithProductsDto>> GetSingleCategoryByWithProductAsync(int categoryId)
+        {
+            var category = await _categoryRepository.GetSingleCategoryByWithProductAsync(categoryId);
+            if (category == null)
+            {
+                return CustomeResponseDto<CategoryWithProductsDto>.Fail($"{categoryId} For Category Not Found", 404);
+            }
+            var categoryDto = _mapper.Map<CategoryWithProductsDto>(category);
+            return CustomeResponseDto<CategoryWithProductsDto>.Success(categoryDto, 200);
         }
     }
 }

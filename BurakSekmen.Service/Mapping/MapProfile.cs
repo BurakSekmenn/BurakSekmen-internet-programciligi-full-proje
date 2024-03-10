@@ -19,6 +19,9 @@ namespace BurakSekmen.Service.Mapping
             CreateMap<Person, PersonDto>().ReverseMap();
             CreateMap<Sales,SalesDto>().ReverseMap();
             CreateMap<Product, ProductDto>();
+            CreateMap<Category, CategoryWithProductsDto>();
+            CreateMap<Category, CategoryWithProductsDto>().ReverseMap();
+
 
         }
     }

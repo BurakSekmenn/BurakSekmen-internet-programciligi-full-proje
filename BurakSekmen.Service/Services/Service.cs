@@ -31,7 +31,6 @@ namespace BurakSekmen.Service.Services
             {
                 throw new NotFoundExecption($"{typeof(T).Name}({id}) Not Found");
             }
-
             return datacontrol;
         }
 

@@ -18,6 +18,13 @@ namespace BurakSekmen.API.Controllers
             _categoryService = categoryService;
         }
 
+        [HttpGet("[action]/{categoryId}")]
+        public async Task<IActionResult> GetSingleCategoryByWithProductAsync(int categoryId)
+        {
+            return CreateActionResult(await _categoryService.GetSingleCategoryByWithProductAsync(categoryId));
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
