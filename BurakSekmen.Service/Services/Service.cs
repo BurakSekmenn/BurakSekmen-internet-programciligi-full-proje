@@ -51,8 +51,17 @@ namespace BurakSekmen.Service.Services
 
         public async Task<T> AddAsync(T entity)
         {
-            await _genericRepository.AddAsync(entity);
-            await _unitOfWorks.CommitAsync();
+            try
+            {
+                await _genericRepository.AddAsync(entity);
+                await _unitOfWorks.CommitAsync();
+                return entity;
+            }
+            catch (DbUpdateException ex)
+            {
+                var innerException = ex.InnerException;
+            }
+
             return entity;
         }
 
