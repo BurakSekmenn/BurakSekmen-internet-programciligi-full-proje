@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Repository;
 using BurakSekmen.Repository.Context;
@@ -16,12 +17,18 @@ namespace BurakSekmen.Repository.Repositories
         {
         }
 
-        public async Task<List<ProductFeature>> GetProductFeaturesWithProducts(int productId)
+
+        public async Task<List<ProductFeatureAndProductinfoDtos>> GetProductFeaturesWithProducts(int productId)
         {
-            return await _context.ProductFeatures
+            
+            var data = await _context.ProductFeatures
                 .Include(pf => pf.Product)
                 .Where(x => x.ProductId == productId)
                 .ToListAsync();
+
+
+            return  null;
+
         }
     }
 }

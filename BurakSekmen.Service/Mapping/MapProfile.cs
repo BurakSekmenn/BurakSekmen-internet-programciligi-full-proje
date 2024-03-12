@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 
@@ -20,15 +15,14 @@ namespace BurakSekmen.Service.Mapping
             CreateMap<Sales, SalesDto>().ReverseMap();
             CreateMap<Category, CategoryWithProductsDto>().ReverseMap();
             CreateMap<Product, ProductWithCategoryDto>().ReverseMap();
-
             CreateMap<ProductFeature, ProductFeatureDto>();
-       
-            CreateMap<ProductFeature, ProductFeatureAndProductinfoDtos>();
-            CreateMap<ProductFeature, ProductFeatureAndProductinfoDtos>();
-            CreateMap<Product, ProductFeatureAndProductinfoDtos>();
+            //    "Unable to cast object of type 'BurakSekmen.Core.DTOs.ProductDto' to type 'BurakSekmen.Core.DTOs.ProductFeatureAndProductinfoDtos'."
             CreateMap<Product, ProductDto>();
-            CreateMap<ProductDto, Product>();
-
+            CreateMap<ProductDto, Product>(); 
+            CreateMap<ProductFeature, ProductFeatureAndProductinfoDtos>();
+            CreateMap<ProductDto, ProductFeature>();
+            CreateMap<ProductFeatureAndProductinfoDtos, ProductDto>();
+            CreateMap<ProductFeatureAndProductinfoDtos, ProductDto>().ReverseMap();
 
         }
     }

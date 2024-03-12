@@ -4,6 +4,7 @@ using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BurakSekmen.API.Controllers
 {
@@ -34,10 +35,11 @@ namespace BurakSekmen.API.Controllers
             await _productFeatureService.RemoveAsync(productFeature);
             return CreateActionResult(CustomeResponseDto<PersonDto>.Success(_mapper.Map<PersonDto>(productFeature), 200));
         }
-        [HttpGet("product-features/{productId}")]
+        [HttpGet("product/{productId}")]
         public async Task<IActionResult> GetProductFeatures(int productId)
         {
-           return CreateActionResult(await _productFeatureService.GetProductFeaturesWithProducts(productId));
+            var productFeatures = await _productFeatureService.GetByIdIncludeAsync(productId, false, i => i.Product);
+            return Ok(productFeatures);
         }
 
     }

@@ -49,6 +49,15 @@ namespace BurakSekmen.Service.Services
             return await _genericRepository.AnyAsync(expression);
         }
 
+        public async Task<T> GetByIdIncludeAsync(int id, bool tracking = true, params Expression<Func<T, object>>[] includes)
+        {
+            var hasProduct = await _genericRepository.GetByIdIncludeAsync(id, tracking, includes);
+
+            return hasProduct;
+
+
+        }
+
         public async Task<T> AddAsync(T entity)
         {
             try

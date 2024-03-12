@@ -1,10 +1,11 @@
-﻿using BurakSekmen.Core.Entity;
+﻿using BurakSekmen.Core.DTOs;
+using BurakSekmen.Core.Entity;
 
 namespace BurakSekmen.Core.Repository
 {
     public interface IProductFeatureRepository:IGenericRepository<ProductFeature>
     {
-        Task<List<ProductFeature>> GetProductFeaturesWithProducts(int productId);
+        Task<List<ProductFeatureAndProductinfoDtos>> GetProductFeaturesWithProducts(int productId);
        
     }
 }

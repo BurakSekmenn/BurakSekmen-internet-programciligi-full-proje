@@ -11,6 +11,10 @@ namespace BurakSekmen.Core.Repository
 
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
 
+        Task<T> GetByIdIncludeAsync(int id, bool tracking = true, params Expression<Func<T, object>>[] includes);
+
+
+
         Task AddAsync(T entity);
 
         Task AddRangeAsync(IEnumerable<T> entity);

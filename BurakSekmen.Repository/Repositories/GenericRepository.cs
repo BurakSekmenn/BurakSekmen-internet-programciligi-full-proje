@@ -37,6 +37,24 @@ namespace BurakSekmen.Repository.Repositories
             return await _dbSet.AnyAsync(expression);
         }
 
+        public async Task<T> GetByIdIncludeAsync(int id, bool tracking = true, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (!tracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+
+        }
+
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);

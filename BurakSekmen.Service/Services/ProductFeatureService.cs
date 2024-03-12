@@ -18,24 +18,15 @@ namespace BurakSekmen.Service.Services
             _productFeatureRepository = productFeatureRepository;
         }
 
-
         public async Task<CustomeResponseDto<List<ProductFeatureAndProductinfoDtos>>> GetProductFeaturesWithProducts(int productId)
         {
             var productdata = await _productFeatureRepository.GetProductFeaturesWithProducts(productId);
-            if (productdata == null || !productdata.Any())
+            if (productdata == null)
             {
                 return CustomeResponseDto<List<ProductFeatureAndProductinfoDtos>>.Fail($"Ürüne ait bilgi bulunamadı", 404);
             }
-
-            var categoryDtoList = productdata.Select(pf => new ProductFeatureAndProductinfoDtos
-            {
-                ProductFeatures = _mapper.Map<List<ProductFeatureDto>>(pf),
-                Product = _mapper.Map<ProductDto>(pf.Product)
-            }).ToList();
-
-
-
-            return CustomeResponseDto<List<ProductFeatureAndProductinfoDtos>>.Success(categoryDtoList,200);
+            var categoryDtoList = _mapper.Map<ProductFeatureAndProductinfoDtos>(productdata);
+            return CustomeResponseDto<List<ProductFeatureAndProductinfoDtos>>.Success(200);
         }
 
        
