@@ -14,9 +14,9 @@ namespace BurakSekmen.Service.Validations
         {
             RuleFor(x => x.Quantity).NotEmpty().WithMessage("Miktar boş geçilemez");
             RuleFor(x => x.Price).NotEmpty().WithMessage("Fiyat boş geçilemez");
-            RuleFor(x => x.TotalPrice).NotEmpty().WithMessage("Toplam fiyat boş geçilemez");
-            RuleFor(x => x.ProductId).NotEmpty().WithMessage("Ürün Id boş geçilemez");
-            RuleFor(x => x.PersonId).NotEmpty().WithMessage("Kişi Id boş geçilemez");
+            //RuleFor(x => x.TotalPrice).NotEmpty().WithMessage("Toplam fiyat boş geçilemez");
+            //RuleFor(x => x.ProductId).NotEmpty().WithMessage("Ürün Id boş geçilemez");
+            //RuleFor(x => x.PersonId).NotEmpty().WithMessage("Kişi Id boş geçilemez");
         }
     }
 }

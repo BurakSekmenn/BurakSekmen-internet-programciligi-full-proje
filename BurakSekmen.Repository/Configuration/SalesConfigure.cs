@@ -20,6 +20,7 @@ namespace BurakSekmen.Repository.Configuration
             builder.Property(x => x.Quantity).IsRequired();
             builder.Property(x => x.Price).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(x => x.TotalPrice).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(x => x.TotalPrice).HasComputedColumnSql("[Quantity] * [Price]");
             builder.ToTable("Sales");
         }
     }
