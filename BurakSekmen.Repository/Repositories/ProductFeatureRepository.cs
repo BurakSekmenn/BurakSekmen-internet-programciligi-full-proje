@@ -21,10 +21,10 @@ namespace BurakSekmen.Repository.Repositories
         public async Task<List<ProductFeatureAndProductinfoDtos>> GetProductFeaturesWithProducts(int productId)
         {
             
-            var data = await _context.ProductFeatures
-                .Include(pf => pf.Product)
-                .Where(x => x.ProductId == productId)
-                .ToListAsync();
+            //var data = await _context.ProductFeatures
+            //    .Include(pf => pf.Product)
+            //    .Where(x => x.ProductId == productId)
+            //    .ToListAsync();
 
 
             return  null;

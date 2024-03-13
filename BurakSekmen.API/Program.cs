@@ -19,7 +19,8 @@ builder.Services.AddControllers(opt =>
 }).AddFluentValidation(x =>
 {
     x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-});
+}).AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>

@@ -18,6 +18,7 @@ namespace BurakSekmen.Service.Validations
             RuleFor(x => x.Stock).NotEmpty().WithMessage("Ürün stok adedi boş geçilemez");
             RuleFor(x => x.ImageUrl).NotEmpty().WithMessage("Ürün resmi boş geçilemez");
             RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Ürün kategorisi boş geçilemez");
+            RuleFor(x => x.ProductFeatureId).NotEmpty().WithMessage("Ürün Özelleklileri Boş Geçilemez");
         }
     }
 }

@@ -46,6 +46,23 @@ namespace BurakSekmen.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductFeatures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Height = table.Column<int>(type: "int", nullable: false),
+                    Width = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductFeatures", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -57,6 +74,7 @@ namespace BurakSekmen.Repository.Migrations
                     Stock = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ProductFeatureId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -69,26 +87,10 @@ namespace BurakSekmen.Repository.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductFeatures",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Height = table.Column<int>(type: "int", nullable: false),
-                    Width = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductFeatures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductFeatures_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Products_ProductFeatures_ProductFeatureId",
+                        column: x => x.ProductFeatureId,
+                        principalTable: "ProductFeatures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -125,14 +127,15 @@ namespace BurakSekmen.Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductFeatures_ProductId",
-                table: "ProductFeatures",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ProductFeatureId",
+                table: "Products",
+                column: "ProductFeatureId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sales_PersonId",
@@ -149,9 +152,6 @@ namespace BurakSekmen.Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductFeatures");
-
-            migrationBuilder.DropTable(
                 name: "Sales");
 
             migrationBuilder.DropTable(
@@ -162,6 +162,9 @@ namespace BurakSekmen.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "ProductFeatures");
         }
     }
 }

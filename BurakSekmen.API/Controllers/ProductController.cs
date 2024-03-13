@@ -2,6 +2,7 @@
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
+using BurakSekmen.Service.Exceptions;
 using BurakSekmen.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,16 @@ namespace BurakSekmen.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
+        private readonly IProductFeatureService _productFeatureService;
+        private readonly ICategoryService _categoryService;
 
 
-        public ProductController(IMapper mapper, IProductService productService)
+        public ProductController(IMapper mapper, IProductService productService, IProductFeatureService productFeatureService, ICategoryService categoryService)
         {
             _mapper = mapper;
             _productService = productService;
+            _productFeatureService = productFeatureService;
+            _categoryService = categoryService;
         }
 
         [HttpGet("GetProductWithCategories")]
@@ -48,6 +53,21 @@ namespace BurakSekmen.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
+            var category = await _productService.AnyAsync(product => product.CategoryId == productDto.CategoryId);
+            var productFeature = await _productService.AnyAsync(feature => feature.ProductFeatureId == productDto.ProductFeatureId);
+            if (!category || !productFeature)
+            {
+                string errorMessage = "";
+                if (!category)
+                {
+                    errorMessage += "Böyle Bir Kategori yok. ";
+                }
+                if (!productFeature)
+                {
+                    errorMessage += "Böyle Bir Ürün Özelliği yok ";
+                }
+                return NotFound(new { ErrorMessages = errorMessage });
+            }
             var product = await _productService.AddAsync(_mapper.Map<Product>(productDto));
             return CreateActionResult(CustomeResponseDto<ProductDto>.Success(_mapper.Map<ProductDto>(product), 200));
         }

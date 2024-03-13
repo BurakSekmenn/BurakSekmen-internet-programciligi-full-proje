@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BurakSekmen.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240310185515_mig1")]
+    [Migration("20240313134809_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -127,12 +127,18 @@ namespace BurakSekmen.Repository.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ProductFeatureId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductFeatureId")
+                        .IsUnique();
 
                     b.ToTable("Products", (string)null);
                 });
@@ -150,18 +156,19 @@ namespace BurakSekmen.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Width")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductFeatures", (string)null);
                 });
@@ -212,18 +219,15 @@ namespace BurakSekmen.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("BurakSekmen.Core.Entity.ProductFeature", b =>
-                {
-                    b.HasOne("BurakSekmen.Core.Entity.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
+                    b.HasOne("BurakSekmen.Core.Entity.ProductFeature", "productFeature")
+                        .WithOne("Product")
+                        .HasForeignKey("BurakSekmen.Core.Entity.Product", "ProductFeatureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Category");
+
+                    b.Navigation("productFeature");
                 });
 
             modelBuilder.Entity("BurakSekmen.Core.Entity.Sales", b =>
@@ -253,6 +257,11 @@ namespace BurakSekmen.Repository.Migrations
             modelBuilder.Entity("BurakSekmen.Core.Entity.Person", b =>
                 {
                     b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("BurakSekmen.Core.Entity.ProductFeature", b =>
+                {
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

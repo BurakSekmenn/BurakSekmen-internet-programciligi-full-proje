@@ -58,20 +58,20 @@ namespace BurakSekmen.Service.Services
 
         }
 
+        public Task<T> getByIdThenIncludeAsyncTask(int id, bool tracking = true, params Expression<Func<T, object>>[] includes)
+        {
+            return _genericRepository.getByIdThenIncludeAsyncTask(id, tracking, includes);
+        }
+
         public async Task<T> AddAsync(T entity)
         {
-            try
-            {
+           
                 await _genericRepository.AddAsync(entity);
                 await _unitOfWorks.CommitAsync();
                 return entity;
-            }
-            catch (DbUpdateException ex)
-            {
-                var innerException = ex.InnerException;
-            }
+            
+           
 
-            return entity;
         }
 
         public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entity)

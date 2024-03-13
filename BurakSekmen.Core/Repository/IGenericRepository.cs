@@ -12,6 +12,7 @@ namespace BurakSekmen.Core.Repository
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
 
         Task<T> GetByIdIncludeAsync(int id, bool tracking = true, params Expression<Func<T, object>>[] includes);
+        Task<T> getByIdThenIncludeAsyncTask(int id, bool tracking = true, params Expression<Func<T, object>>[] includes);
 
 
 
