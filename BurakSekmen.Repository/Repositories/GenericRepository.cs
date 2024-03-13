@@ -70,7 +70,15 @@ namespace BurakSekmen.Repository.Repositories
             }
 
 
-            return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+            var data = await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+
+            if (data == null)
+            {
+                throw new Exception("Böyle Bir Ürün Bulunamadı");
+            }
+
+            return data;
+
 
         }
 

@@ -33,6 +33,13 @@ namespace BurakSekmen.API.Controllers
         }
 
 
+        [HttpGet("GetProductWithCategoryAndFeature/{id}")]
+        public async Task<IActionResult> GetProductWithCategoryAndFeature(int id)
+        {
+            var product = await _productService.getByIdThenIncludeAsyncTask(id, false, i => i.productFeature, x => x.Category);
+            return Ok(product);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -87,6 +94,8 @@ namespace BurakSekmen.API.Controllers
             _productService.RemoveAsync(product);
             return CreateActionResult(CustomeResponseDto<ProductDto>.Success(_mapper.Map<ProductDto>(product), 200));
         }
+
+        
 
     }
 
