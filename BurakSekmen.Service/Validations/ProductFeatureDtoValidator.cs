@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BurakSekmen.Core.DTOs;
+﻿using BurakSekmen.Core.DTOs;
 using FluentValidation;
 
 namespace BurakSekmen.Service.Validations

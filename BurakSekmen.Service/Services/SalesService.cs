@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Repository;
 using BurakSekmen.Core.Services;
 using BurakSekmen.Core.UnitOfWorks;
+using System.Linq.Expressions;
 
 namespace BurakSekmen.Service.Services
 {

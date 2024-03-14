@@ -2,12 +2,11 @@
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
-   
+
     public class SalesController : CustomBaseController
     {
         private readonly ISalesService _salesService;
