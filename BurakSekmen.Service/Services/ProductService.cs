@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq.Expressions;
+using AutoMapper;
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Repository;
@@ -23,6 +24,11 @@ namespace BurakSekmen.Service.Services
             var products = await _productRepository.GetProductsWithCategory();
             var productWithCategoryDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
             return CustomeResponseDto<List<ProductWithCategoryDto>>.Success(productWithCategoryDto, 200);
+        }
+
+        public Task<IEnumerable<Product>> GetCategoryAndFeatures(bool tracking = true, params Expression<Func<Product, object>>[] includes)
+        {
+            return _productRepository.GetCategoryAndFeatures(tracking, includes);
         }
     }
 }

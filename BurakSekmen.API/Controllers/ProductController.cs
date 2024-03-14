@@ -31,15 +31,20 @@ namespace BurakSekmen.API.Controllers
         {
             return CreateActionResult(await _productService.GetProductsWithCategory());
         }
-
-
+        [HttpGet("GetCategoryAndFeatures")]
+        public async Task<IActionResult> GetCategoryAndFeatures()
+        {
+            var products = await _productService.GetCategoryAndFeatures(false, i => i.productFeature, x => x.Category);
+            return Ok(products);
+       
+        }
         [HttpGet("GetProductWithCategoryAndFeature/{id}")]
         public async Task<IActionResult> GetProductWithCategoryAndFeature(int id)
         {
             var product = await _productService.getByIdThenIncludeAsyncTask(id, false, i => i.productFeature, x => x.Category);
             return Ok(product);
         }
-
+   
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
