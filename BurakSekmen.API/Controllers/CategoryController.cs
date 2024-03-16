@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
@@ -46,6 +47,8 @@ namespace BurakSekmen.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(CategoryDto categoryDto)
         {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            categoryDto.RecordingName = username;
             var category = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
             return CreateActionResult(CustomeResponseDto<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200));
         }
