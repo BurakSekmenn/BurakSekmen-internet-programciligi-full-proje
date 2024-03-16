@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
 using BurakSekmen.Core.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BurakSekmen.Repository.Context
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<User,Role,string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -16,6 +17,7 @@ namespace BurakSekmen.Repository.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }  
         public DbSet<Sales> Sales { get; set; }
+
 
 
 
