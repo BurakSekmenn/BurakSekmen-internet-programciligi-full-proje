@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using BurakSekmen.Core.Entity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,9 @@ namespace BurakSekmen.Repository.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+           modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(p => new { p.LoginProvider, p.ProviderKey }); // IdentityUserLogin tablosu için birincil anahtar tanımı
+           modelBuilder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId }); // IdentityUserRole tablosu için birincil anahtar tanımı
+           modelBuilder.Entity<IdentityUserToken<string>>().HasKey(p => new { p.UserId, p.LoginProvider, p.Name }); // IdentityUserToken tablosu için birincil anahtar tanımı
 
         }
         
