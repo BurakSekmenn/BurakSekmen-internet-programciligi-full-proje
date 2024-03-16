@@ -24,6 +24,11 @@ namespace BurakSekmen.Service.Services
             return _salesRepository.GetPersonSalesWithIncludesAsync(personId, tracking, includes);
         }
 
+        public Task<IEnumerable<Sales>> ListPersonSales(bool tracking = true, params Expression<Func<Sales, object>>[] includes)
+        {
+            return _salesRepository.ListPersonSales(tracking, includes);
+        }
+
         public Task<bool> MakeSale(int productId, int quantity)
         {
             return _salesRepository.MakeSale(productId, quantity);

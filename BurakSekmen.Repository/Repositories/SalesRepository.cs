@@ -38,6 +38,23 @@ namespace BurakSekmen.Repository.Repositories
             return data;
         }
 
+        public async Task<IEnumerable<Sales>> ListPersonSales(bool tracking = true, params Expression<Func<Sales, object>>[] includes)
+        {
+            IQueryable<Sales> query = _context.Sales;
+            if (!tracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+            var data = await query.ToListAsync();
+
+            return data;
+        }
+
         public async Task<bool> MakeSale(int productId, int quantity)
         {
             var product = await _context.Products.FindAsync(productId);

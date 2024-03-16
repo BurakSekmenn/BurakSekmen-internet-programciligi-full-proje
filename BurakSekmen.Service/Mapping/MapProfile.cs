@@ -19,7 +19,6 @@ namespace BurakSekmen.Service.Mapping
             CreateMap<Category, CategoryWithProductsDto>().ReverseMap();
             CreateMap<Product, ProductWithCategoryDto>().ReverseMap();
             CreateMap<ProductFeature, ProductFeatureDto>();
-            //    "Unable to cast object of type 'BurakSekmen.Core.DTOs.ProductDto' to type 'BurakSekmen.Core.DTOs.ProductFeatureAndProductinfoDtos'."
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDto, Product>(); 
             CreateMap<ProductFeature, ProductFeatureAndProductinfoDtos>();

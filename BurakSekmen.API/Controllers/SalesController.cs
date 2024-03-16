@@ -28,6 +28,13 @@ namespace BurakSekmen.API.Controllers
             return CreateActionResult(CustomeResponseDto<List<SalesDto>>.Success(salesDtos, 200));
         }
 
+        [HttpGet("ListPersonSales")]
+        public async Task<IActionResult> ListPersonSales()
+        {
+            var personSales = await _salesService.ListPersonSales(false, i => i.Product, m => m.Person);
+            return Ok(personSales);
+        }
+
         [HttpGet("ListPersonSales/{id}")]
         public async Task<IActionResult> ListPersonSales(int id)
         {
@@ -38,6 +45,8 @@ namespace BurakSekmen.API.Controllers
           );
             return Ok(personSales);
         }
+
+    
 
         [HttpPost]
         public async Task<IActionResult> Save(SalesDto salesDto)

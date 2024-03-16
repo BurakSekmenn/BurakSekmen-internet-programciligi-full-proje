@@ -8,7 +8,8 @@ namespace BurakSekmen.Core.Services
     {
         Task<IEnumerable<Sales>> GetPersonSalesWithIncludesAsync(int personId, bool tracking = true,
             params Expression<Func<Sales, object>>[] includes);
-
+        Task<IEnumerable<Sales>> ListPersonSales(bool tracking = true,
+            params Expression<Func<Sales, object>>[] includes);
         Task<bool> MakeSale(int productId, int quantity);
         Task<bool> UpdateStockAsync(SalesDto salesDto);
     }
