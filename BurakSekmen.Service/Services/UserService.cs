@@ -143,7 +143,7 @@ namespace BurakSekmen.Service.Services
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Name,user.FirstName),
-                    new Claim(JwtRegisteredClaimNames.Name,user.LastName),
+                    
                     new Claim("uid", user.Id)
                 }
                 .Union(userClaims)
