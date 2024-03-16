@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BurakSekmen.Repository.Context
 {
-    public class AppDbContext:IdentityDbContext<User,Role,string>
+    public class AppDbContext:IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

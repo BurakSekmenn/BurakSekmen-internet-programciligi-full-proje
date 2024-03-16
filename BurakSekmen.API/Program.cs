@@ -23,19 +23,7 @@ builder.Services.AddControllers(opt =>
     x.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 }).AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-builder.Services.AddIdentity<User, Role>(options =>
-    {
-        options.Password.RequireDigit = false;
-        options.Password.RequiredLength = 6;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireLowercase = false;
-        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15); // Hesap kilitleme süresi
-        options.Lockout.MaxFailedAccessAttempts = 5; // Maksimum baþarýsýz giriþ denemesi sayýsý
-        options.User.RequireUniqueEmail = true; // Kullanýcý adý (email) benzersiz olmalý
-    })
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
