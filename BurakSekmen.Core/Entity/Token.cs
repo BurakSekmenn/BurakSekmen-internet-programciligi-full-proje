@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace BurakSekmen.Core.Entity
 {
-    public class AddRoleModel
+    public class Token
     {
         [Key] // Birincil anahtar olarak belirlenen özellik
         public int Id { get; set; }
-
         public string Email { get; set; }
- 
         public string Password { get; set; }
-      
-        public string Role { get; set; }
     }
 }

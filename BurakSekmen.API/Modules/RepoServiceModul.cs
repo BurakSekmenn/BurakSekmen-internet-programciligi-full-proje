@@ -8,6 +8,7 @@ using BurakSekmen.Repository.Repositories;
 using BurakSekmen.Repository.UnitOfWorks;
 using BurakSekmen.Service.Mapping;
 using BurakSekmen.Service.Services;
+using Microsoft.Identity.Client;
 using Module = Autofac.Module;
 
 namespace BurakSekmen.API.Modules
@@ -21,6 +22,8 @@ namespace BurakSekmen.API.Modules
             builder.RegisterGeneric(typeof(Service<>)).As(typeof(IService<>))
                 .InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWorks>().As<IUnitOfWorks>();
+         
+         
 
             var ApiAssembly = Assembly.GetExecutingAssembly();
 

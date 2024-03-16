@@ -2,6 +2,7 @@
 using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace BurakSekmen.API.Controllers
             _mapper = mapper;
             _categoryService = categoryService;
         }
-
+        [Authorize]
         [HttpGet("[action]/{categoryId}")]
         public async Task<IActionResult> GetSingleCategoryByWithProductAsync(int categoryId)
         {

@@ -12,6 +12,7 @@ namespace BurakSekmen.Service.Services
         private readonly IGenericRepository<T> _genericRepository;
         private readonly IUnitOfWorks _unitOfWorks;
 
+
         public Service(IGenericRepository<T> genericRepository, IUnitOfWorks unitOfWorks)
         {
             _genericRepository = genericRepository;
