@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
+    [Authorize]
     public class CategoryController : CustomBaseController
     {
         private readonly IMapper _mapper;

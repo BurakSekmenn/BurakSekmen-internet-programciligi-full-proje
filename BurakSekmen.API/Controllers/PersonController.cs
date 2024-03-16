@@ -3,12 +3,13 @@ using BurakSekmen.Core.DTOs;
 using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
 using BurakSekmen.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
-  
+    [Authorize]
     public class PersonController : CustomBaseController
     {
         private readonly IPersonService _personService;

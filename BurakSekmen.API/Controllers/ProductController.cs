@@ -4,12 +4,13 @@ using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
 using BurakSekmen.Service.Exceptions;
 using BurakSekmen.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
- 
+    [Authorize]
     public class ProductController : CustomBaseController
     {
         private readonly IMapper _mapper;
