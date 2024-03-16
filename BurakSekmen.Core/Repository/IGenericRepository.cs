@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using BurakSekmen.Core.Entity;
+using System.Linq.Expressions;
 
 namespace BurakSekmen.Core.Repository
 {
@@ -27,6 +28,8 @@ namespace BurakSekmen.Core.Repository
         void Remove(T entity);
 
         void RemoveRange(IEnumerable<T> entity);
+
+      
 
 
 

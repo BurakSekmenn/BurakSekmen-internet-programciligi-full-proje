@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
-    [Authorize]
+ 
     public class ProductController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -64,10 +64,10 @@ namespace BurakSekmen.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(ProductDto productDto)
+        public async Task<IActionResult> Save(SaveProductDto saveProductDto)
         {
-            var category = await _productService.AnyAsync(product => product.CategoryId == productDto.CategoryId);
-            var productFeature = await _productService.AnyAsync(feature => feature.ProductFeatureId == productDto.ProductFeatureId);
+            var category = await _categoryService.AnyAsync(x => x.Id == saveProductDto.CategoryId);
+            var productFeature = await _productFeatureService.AnyAsync(x => x.Id == saveProductDto.ProductFeatureId);
             if (!category || !productFeature)
             {
                 string errorMessage = "";
@@ -81,8 +81,15 @@ namespace BurakSekmen.API.Controllers
                 }
                 return NotFound(new { ErrorMessages = errorMessage });
             }
-            var product = await _productService.AddAsync(_mapper.Map<Product>(productDto));
-            return CreateActionResult(CustomeResponseDto<ProductDto>.Success(_mapper.Map<ProductDto>(product), 200));
+            try
+            {
+                var product = await _productService.AddAsync(_mapper.Map<Product>(saveProductDto));
+                return CreateActionResult(CustomeResponseDto<SaveProductDto>.Success(_mapper.Map<SaveProductDto>(product), 200));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ErrorMessages = ex.Message, InnerException = ex.InnerException?.Message });
+            }
         }
 
         [HttpPut]

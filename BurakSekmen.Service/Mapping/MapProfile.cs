@@ -9,9 +9,7 @@ namespace BurakSekmen.Service.Mapping
         public MapProfile()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
-            CreateMap<Product, ProductDto>()
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
-                .ForMember(dest => dest.productFeature, opt => opt.MapFrom(src => src.productFeature));
+            
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<ProductFeature, ProductFeatureDto>().ReverseMap();
             CreateMap<Person, PersonDto>().ReverseMap();
@@ -26,7 +24,11 @@ namespace BurakSekmen.Service.Mapping
             CreateMap<ProductFeatureAndProductinfoDtos, ProductDto>();
             CreateMap<ProductFeatureAndProductinfoDtos, ProductDto>().ReverseMap();
             CreateMap<Sales, SalesDto>().ReverseMap();
-          
+            CreateMap<SaveProductDto, Product>()
+                .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
+                .ForMember(dest => dest.ProductFeatureId, opt => opt.MapFrom(src => src.ProductFeatureId))
+                .ReverseMap();
+
 
         }
     }

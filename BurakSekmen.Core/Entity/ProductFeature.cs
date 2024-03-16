@@ -11,6 +11,6 @@ namespace BurakSekmen.Core.Entity
         public string? Color { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public Product? Product { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

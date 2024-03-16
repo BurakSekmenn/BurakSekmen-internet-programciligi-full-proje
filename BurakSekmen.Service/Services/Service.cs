@@ -4,6 +4,7 @@ using BurakSekmen.Core.UnitOfWorks;
 using BurakSekmen.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using BurakSekmen.Core.Entity;
 
 namespace BurakSekmen.Service.Services
 {
@@ -101,5 +102,7 @@ namespace BurakSekmen.Service.Services
            _genericRepository.RemoveRange(entity);
            await _unitOfWorks.CommitAsync();
         }
+
+    
     }
 }

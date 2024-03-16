@@ -2,6 +2,7 @@
 using BurakSekmen.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using BurakSekmen.Core.Entity;
 
 namespace BurakSekmen.Repository.Repositories
 {
@@ -105,5 +106,7 @@ namespace BurakSekmen.Repository.Repositories
         {
             _dbSet.RemoveRange(entity);
         }
+
+     
     }
 }

@@ -10,6 +10,7 @@ namespace BurakSekmen.Core.Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string RecordingName { get; set; }
         public ICollection<Product> Products { get; set; }
     }
 }
