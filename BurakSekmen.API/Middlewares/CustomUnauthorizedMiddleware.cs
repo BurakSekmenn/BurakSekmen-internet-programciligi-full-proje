@@ -1,4 +1,6 @@
-﻿namespace BurakSekmen.API.Middlewares
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace BurakSekmen.API.Middlewares
 {
     public class CustomUnauthorizedMiddleware
     {
@@ -11,13 +13,15 @@
 
         public async Task Invoke(HttpContext context)
         {
-            if (!context.User.Identity.IsAuthenticated)
+            var endpoint = context.GetEndpoint();
+            if (endpoint != null && endpoint.Metadata.GetMetadata<IAllowAnonymous>() == null && !context.User.Identity.IsAuthenticated)
             {
                 context.Response.StatusCode = 401;
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync("{\"message\": \"Unauthorized: Token is missing or invalid.\"}");
                 return;
             }
+
             await _next(context);
         }
     }

@@ -133,7 +133,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCustomException();
 app.UseHttpsRedirection();
-app.UseCustomUnauthorizedMiddleware();
+app.UseCustomUnauthorizedMiddleware(); // Kendi Middleware'imi ekledim. Authorize olmayanlar için.
 
 app.UseAuthentication();
 app.UseAuthorization();

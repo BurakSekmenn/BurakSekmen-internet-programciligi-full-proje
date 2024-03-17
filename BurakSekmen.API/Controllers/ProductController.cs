@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
- 
+    [AllowAnonymous]
     public class ProductController : CustomBaseController
     {
         private readonly IMapper _mapper;
