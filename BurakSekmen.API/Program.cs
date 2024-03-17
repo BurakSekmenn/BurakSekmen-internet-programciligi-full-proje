@@ -133,6 +133,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCustomException();
 app.UseHttpsRedirection();
+app.UseCustomUnauthorizedMiddleware();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
