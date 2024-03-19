@@ -19,6 +19,8 @@ namespace BurakSekmen.Repository.Context
         public DbSet<ProductFeature> ProductFeatures { get; set; }  
         public DbSet<Sales> Sales { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
 
 
 
