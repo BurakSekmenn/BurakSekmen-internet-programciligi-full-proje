@@ -28,6 +28,9 @@ namespace BurakSekmen.Service.Mapping
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
                 .ForMember(dest => dest.ProductFeatureId, opt => opt.MapFrom(src => src.ProductFeatureId))
                 .ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Customer,CustomerDto>().ReverseMap(); 
+            CreateMap<CustomerDto,Customer>().ReverseMap(); 
 
 
         }
