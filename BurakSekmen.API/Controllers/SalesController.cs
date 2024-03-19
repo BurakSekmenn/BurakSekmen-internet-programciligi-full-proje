@@ -12,13 +12,15 @@ namespace BurakSekmen.API.Controllers
     {
         private readonly ISalesService _salesService;
         private readonly IPersonService _personService;
+        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public SalesController(ISalesService salesService, IMapper mapper, IPersonService personService)
+        public SalesController(ISalesService salesService, IMapper mapper, IPersonService personService, ICategoryService categoryService)
         {
             _salesService = salesService;
             _mapper = mapper;
             _personService = personService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -52,8 +54,8 @@ namespace BurakSekmen.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(SalesDto salesDto)
         {
-            var person = await _salesService.AnyAsync(person => person.PersonId == salesDto.PersonId);
-            var product = await _salesService.AnyAsync(product => product.ProductId == salesDto.ProductId);
+            var person = await _personService.AnyAsync(person => person.Id == salesDto.PersonId);
+            var product = await _categoryService.AnyAsync(product => product.Id == salesDto.ProductId);
             if (!person || !product)
             {
                 string errorMessage = "";
