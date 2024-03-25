@@ -40,7 +40,7 @@ builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<JWT>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
-builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JWT"));
+builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JWT"));// appsettings.json'daki JWT alanýný alýr.
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -50,7 +50,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         o.MigrationsAssembly("BurakSekmen.Repository");
     });
 });
-//githun baðlantý düzenlendi
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddAuthentication(options =>
     {

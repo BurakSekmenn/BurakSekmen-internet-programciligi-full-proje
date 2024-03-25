@@ -31,6 +31,7 @@ namespace BurakSekmen.Service.Mapping
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Customer,CustomerDto>().ReverseMap(); 
             CreateMap<CustomerDto,Customer>().ReverseMap(); 
+            CreateMap<Tax, TaxDto>().ReverseMap();// tax ve taxdto arasında mapleme yapar
 
 
         }

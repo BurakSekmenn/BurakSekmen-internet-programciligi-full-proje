@@ -21,6 +21,8 @@ namespace BurakSekmen.Repository.Context
 
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Tax> Taxes { get; set; }
+
 
 
 
