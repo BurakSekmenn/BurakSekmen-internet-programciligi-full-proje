@@ -5,6 +5,7 @@ using BurakSekmen.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using BurakSekmen.Core.Entity;
+using Serilog;
 
 namespace BurakSekmen.Service.Services
 {
@@ -67,13 +68,10 @@ namespace BurakSekmen.Service.Services
 
         public async Task<T> AddAsync(T entity)
         {
-           
                 await _genericRepository.AddAsync(entity);
                 await _unitOfWorks.CommitAsync();
+                Log.Information("{EntityType} added: {@Entity}", typeof(T).Name, entity);
                 return entity;
-            
-           
-
         }
 
         public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entity)
@@ -95,6 +93,7 @@ namespace BurakSekmen.Service.Services
         {
             _genericRepository.Remove(entity);
             await _unitOfWorks.CommitAsync();
+            Log.Information("{EntityType} deleted: {@Entity}", typeof(T).Name, entity);
         }
 
         public async Task RemoveRangeAsync(IEnumerable<T> entity)

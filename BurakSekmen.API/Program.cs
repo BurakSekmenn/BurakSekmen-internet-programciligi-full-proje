@@ -106,7 +106,8 @@ builder.Services.AddSwaggerGen(c =>
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo
-    .RollingFile("log-{Date}.txt", retainedFileCountLimit: 3) // 3 güne bir log dosyalarýný sil
+    .File("log-{Date}.csv",
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
     .Enrich.FromLogContext()
@@ -143,11 +144,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseCustomException();
 app.UseHttpsRedirection();
-app.UseCustomUnauthorizedMiddleware(); // Kendi Middleware'imi ekledim. Authorize olmayanlar için.
+
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCustomUnauthorizedMiddleware(); // Kendi Middleware'imi ekledim. Authorize olmayanlar için.
 
 app.MapControllers();
 

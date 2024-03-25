@@ -1,0 +1,2 @@
+2024-03-25 23:09:24.370 +03:00 [INF] Tax deleted: {"TaxName":"BurakBayır","Rate":1.00,"Price":1.00,"PaymetDate":"2024-03-25T19:46:48.6510000","Description":"asaaa","Id":5,"CreatedDate":"2024-03-25T19:46:48.6510000","ModifiedDate":null,"$type":"Tax"}
+2024-03-25 23:09:40.224 +03:00 [INF] Tax added: {"TaxName":"aaa","Rate":1,"Price":1,"PaymetDate":"2024-03-25T20:09:33.9940000Z","Description":"aaaaa","Id":7,"CreatedDate":"2024-03-25T20:09:33.9940000Z","ModifiedDate":null,"$type":"Tax"}

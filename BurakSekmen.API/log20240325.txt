@@ -1,1 +1,0 @@
-2024-03-25 22:41:23.317 +03:00 [INF] Tax added: {"TaxName":"asdasd","Rate":1,"Price":10,"PaymetDate":"2024-03-25T19:41:03.5780000Z","Description":"asdasdasd","Id":0,"CreatedDate":"2024-03-25T19:41:03.5780000Z","$type":"TaxDto"}

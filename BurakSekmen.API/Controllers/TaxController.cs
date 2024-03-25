@@ -37,7 +37,6 @@ namespace BurakSekmen.API.Controllers
         public async Task<IActionResult> Save(TaxDto taxDto)
         {
             var tax = await _taxService.AddAsync(_mapper.Map<Tax>(taxDto));
-            Log.Information("Tax added: {@TaxDto}", taxDto);
             return CreateActionResult(CustomeResponseDto<TaxDto>.Success(taxDto,200));
         }
         [HttpPut]

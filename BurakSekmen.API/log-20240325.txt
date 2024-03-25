@@ -1,3 +1,0 @@
-2024-03-25 22:47:01.761 +03:00 [Information] Tax added: TaxDto { TaxName: "asdasd", Rate: 1, Price: 1, PaymetDate: 03/25/2024 19:46:48, Description: "asdasd", Id: 0, CreatedDate: 03/25/2024 19:46:48 }
-2024-03-25 22:47:20.659 +03:00 [Information] Tax added: TaxDto { TaxName: "aaasaas", Rate: 1, Price: 1, PaymetDate: 03/25/2024 19:46:48, Description: "asaaa", Id: 0, CreatedDate: 03/25/2024 19:46:48 }
-2024-03-25 22:47:39.234 +03:00 [Information] Tax added: TaxDto { TaxName: "BurakBayır", Rate: 1, Price: 1, PaymetDate: 03/25/2024 19:46:48, Description: "asaaa", Id: 0, CreatedDate: 03/25/2024 19:46:48 }
