@@ -5,6 +5,7 @@ using BurakSekmen.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace BurakSekmen.API.Controllers
 {
@@ -36,6 +37,7 @@ namespace BurakSekmen.API.Controllers
         public async Task<IActionResult> Save(TaxDto taxDto)
         {
             var tax = await _taxService.AddAsync(_mapper.Map<Tax>(taxDto));
+            Log.Information("Tax added: {@TaxDto}", taxDto);
             return CreateActionResult(CustomeResponseDto<TaxDto>.Success(taxDto,200));
         }
         [HttpPut]

@@ -18,6 +18,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,6 +104,13 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo
+    .RollingFile("log-{Date}.txt", retainedFileCountLimit: 3) // 3 güne bir log dosyalarýný sil
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .CreateLogger();
 
 
 
@@ -131,6 +140,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCustomException();
 app.UseHttpsRedirection();
 app.UseCustomUnauthorizedMiddleware(); // Kendi Middleware'imi ekledim. Authorize olmayanlar için.
