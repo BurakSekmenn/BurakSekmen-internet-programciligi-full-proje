@@ -50,7 +50,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         o.MigrationsAssembly("BurakSekmen.Repository");
     });
 });
-
+//githun baðlantý düzenlendi
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddAuthentication(options =>
     {
