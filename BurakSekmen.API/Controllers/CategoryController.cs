@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [Authorize(Roles = "Administrator")]
     public class CategoryController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -20,14 +21,14 @@ namespace BurakSekmen.API.Controllers
             _mapper = mapper;
             _categoryService = categoryService;
         }
-        [Authorize]
+ 
         [HttpGet("[action]/{categoryId}")]
         public async Task<IActionResult> GetSingleCategoryByWithProductAsync(int categoryId)
         {
             return CreateActionResult(await _categoryService.GetSingleCategoryByWithProductAsync(categoryId));
         }
 
-
+        
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -37,6 +38,7 @@ namespace BurakSekmen.API.Controllers
         }
 
         [HttpGet("{id}")]
+        
         public async Task<IActionResult> GetById(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);

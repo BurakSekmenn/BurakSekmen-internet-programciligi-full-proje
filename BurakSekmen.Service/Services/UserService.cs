@@ -11,6 +11,7 @@ using BurakSekmen.Core.Enums;
 using BurakSekmen.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -111,6 +112,12 @@ namespace BurakSekmen.Service.Services
             }
             if (await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                
+                var adminRoleExists = await _roleManager.RoleExistsAsync("Administrator");
+                if (!adminRoleExists)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("Administrator"));
+                }
                 var roleExists = Enum.GetNames(typeof(Authorization.Roles))
                     .Any(x => x.ToLower() == model.Role.ToLower());
                 if (roleExists)

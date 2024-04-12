@@ -147,8 +147,9 @@ app.UseHttpsRedirection();
 
 
 app.UseAuthentication();
+app.UseCustomUnauthorizedMiddleware();
 app.UseAuthorization();
-app.UseCustomUnauthorizedMiddleware(); // Kendi Middleware'imi ekledim. Authorize olmayanlar için.
+// Kendi Middleware'imi ekledim. Authorize olmayanlar için.
 
 app.MapControllers();
 

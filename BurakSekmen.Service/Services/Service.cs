@@ -92,8 +92,9 @@ namespace BurakSekmen.Service.Services
         public async Task RemoveAsync(T entity)
         {
             _genericRepository.Remove(entity);
-            await _unitOfWorks.CommitAsync();
             Log.Information("{EntityType} deleted: {@Entity}", typeof(T).Name, entity);
+            await _unitOfWorks.CommitAsync();
+           
         }
 
         public async Task RemoveRangeAsync(IEnumerable<T> entity)
