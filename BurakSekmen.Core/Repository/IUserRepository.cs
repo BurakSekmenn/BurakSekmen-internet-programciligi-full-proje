@@ -13,5 +13,6 @@ namespace BurakSekmen.Core.Repository
         Task<AuthenticationModel> GetTokenAsync(Token model);
 
         Task<string> AddRoleAsync(AddRoleModel model);
+       
     }
 }

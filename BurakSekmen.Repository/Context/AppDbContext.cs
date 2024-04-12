@@ -23,6 +23,8 @@ namespace BurakSekmen.Repository.Context
 
         public DbSet<Tax> Taxes { get; set; }
 
+        public DbSet<Coupon> Coupons { get; set; }
+
 
 
 

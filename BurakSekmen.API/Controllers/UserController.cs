@@ -38,5 +38,7 @@ namespace BurakSekmen.API.Controllers
             var result = await _userService.AddRoleAsync(model);
             return Ok(result);
         }
+
+     
     }
 }

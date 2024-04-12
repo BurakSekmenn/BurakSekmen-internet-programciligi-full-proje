@@ -15,5 +15,7 @@ namespace BurakSekmen.Core.Services
         Task<string> AddRoleAsync(AddRoleModel model);
 
       
+
+      
     }
 }

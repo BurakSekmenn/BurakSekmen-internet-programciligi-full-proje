@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BurakSekmen.API.Controllers
 {
-    //[Authorize]
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
+    
     public class CategoryController : CustomBaseController
     {
         private readonly IMapper _mapper;
