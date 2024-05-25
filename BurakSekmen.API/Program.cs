@@ -32,7 +32,10 @@ builder.Services.AddControllers(opt =>
 }).AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", opt =>
+{
+    opt.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
@@ -144,8 +147,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCustomException();
 app.UseHttpsRedirection();
-
-
+app.UseCors("corspolicy");
 app.UseAuthentication();
 app.UseCustomUnauthorizedMiddleware();
 app.UseAuthorization();
