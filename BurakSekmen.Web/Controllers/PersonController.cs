@@ -2,12 +2,11 @@
 
 namespace BurakSekmen.Web.Controllers
 {
-    public class AdminController : Controller
+    public class PersonController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-       
     }
 }

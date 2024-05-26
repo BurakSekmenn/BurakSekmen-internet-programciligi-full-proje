@@ -52,7 +52,7 @@ namespace BurakSekmen.API.Controllers
             return CreateActionResult(CustomeResponseDto<PersonDto>.Success(persondtos, 200));
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var person = _personService.GetByIdAsync(id).Result;
