@@ -14,8 +14,8 @@
     <table class="table table-dark">
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Surname</th>
+            <th>Personel Adı </th>
+            <th>Personel Soyadı</th>
             <th>Mail </th>
             <th>Üye Tarihi</th>
             <th>İşlemler</th>
@@ -27,24 +27,24 @@
           
     </table>
 </div>
-
+@* Ekeleme Mödülü *@
 <div id="addModal" class="modal" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Yeni Personel Ekle</h4>
+                <h4 class="modal-title">Yeni Personel Ekleme</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
                 <form id="addForm">
                     <div class="form-group">
-                        <label for="name">Name:</label>
+                        <label for="name">Personel Adı :</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="surname">Surname:</label>
+                        <label for="surname">Personel Soyadı :</label>
                         <input type="text" class="form-control" id="surname" name="surname" required>
                     </div>
                     <div class="form-group">
@@ -60,6 +60,45 @@
                         <input type="date" class="form-control" id="joinDate" name="joinDate" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="editPersonModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Kişi Güncelleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPersonForm">
+                    <input type="hidden" id="editId" name="id">
+                    <div class="form-group">
+                        <label for="editName">Personel Adı :</label>
+                        <input type="text" class="form-control" id="editName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSurname">Personel Soyadı:</label>
+                        <input type="text" class="form-control" id="editSurname" name="surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email:</label>
+                        <input type="email" class="form-control" id="editEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Şifre:</label>
+                        <input type="text" class="form-control" id="editpassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editJoinDate">Üye Tarihi:</label>
+                        <input type="date" class="form-control" id="editJoinDate" name="joinDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
                 </form>
             </div>
         </div>

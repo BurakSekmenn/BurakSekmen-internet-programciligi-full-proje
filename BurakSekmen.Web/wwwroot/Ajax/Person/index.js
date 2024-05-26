@@ -56,13 +56,9 @@ $(document).ready(function () {
 
     });
 
-
-
     $(document).on('click', '#delete', function() {
         var id = $(this).data('id');
-        // Silme işlemi için gerekli kodları buraya ekleyebilirsiniz
-        console.log('Sil butonuna tıklandı, id:', id);
-        console.log(baseurl);
+   
         $.ajax({
             type: "DELETE",
             url: baseurl + "/api/person/"+id, 
@@ -94,8 +90,84 @@ $(document).ready(function () {
         });
        
     });
+    $(document).on('click', '#edit', function() {
+        var id = $(this).data('id');
+        console.log('Düzenle butonuna tıklandı, id:', id);
+        $('#editPersonModal').show();
+        $.ajax({
+            type: "Get",
+            url: baseurl+"/api/person/"+id,
+            contentType: "application/json",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
 
+            success: function (response) {
+                if (response.statusCode == 200) {
+                    $('#editId').val(response.data.id); 
+                    $('#editName').val(response.data.name);
+                    $('#editSurname').val(response.data.surname);
+                    $('#editEmail').val(response.data.email);
+                    $('#editpassword').val(response.data.password);
+                    var createdDate = new Date(response.createdDate);
+                    var year = createdDate.getFullYear();
+                    var month = ('0' + (createdDate.getMonth() + 1)).slice(-2);
+                    var day = ('0' + createdDate.getDate()).slice(-2);
+                    var formattedDate = year + '-' + month + '-' + day;
 
+                $('#editJoinDate').val(formattedDate);
+                }              
+                console.log(response);            
+            },
+            error: function (xhr, status, error) {
+                console.error('Sunucu hatası:', error);
+            }
+        });       
+    });
+
+    $('.close').click(function() {
+        $('#editPersonModal').hide();
+    });
+
+    $('#editPersonForm').submit(function(e) {
+        e.preventDefault();
+  
+        var personDto = {
+            id: $('#editId').val(),
+            name: $('#editName').val(),
+            surname: $('#editSurname').val(),
+            email: $('#editEmail').val(),
+            password: $('#editpassword').val(),
+            createdDate: $('#editJoinDate').val()
+        };
+        $.ajax({
+            type: "Put",
+            url: baseurl+"/api/person/",
+            data: JSON.stringify(personDto),
+            contentType: "application/json",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            success: function (response) {
+                if (response.statusCode == 200) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: "Veri başarılı bir şekilde güncellendi.",
+                        position: 'topRight',
+                        setTimeout: 3000
+                    });
+                    $('#veri').empty(); // Tabloyu temizle
+                    listele();
+                    $('#editPersonModal').hide();
+                }
+                else {
+                    iziToast.error({
+                        title: 'Hata',
+                        message: response.message,
+                    });
+                }
+            },
+    });
 });
 var baseurl = "https://localhost:7175";
 function listele () {
@@ -113,29 +185,23 @@ function listele () {
             "Authorization": "Bearer " + token
         },
         success: function (response) {
-            console.log(response.data.length); // Veri dizisinin uzunluğunu kontrol et
             if (response.statusCode = 200) {
-                console.log(response.data); // Tüm veriyi konsola yazdır
-            
-               
+               var sırano = 1;
                 $.each(response.data, function(index, item) {
-                    console.log("Item:", item); // Her bir öğenin içeriğini konsola yazdır
-                    console.log("Item:", index); // Her bir öğenin içeriğini konsola yazdır
-                    // Tabloya satır ekleme
-                    console.log(response.data.length); // Veri dizisinin uzunluğunu kontrol et
                     $('#veri').append(
                         '<tr>' +
-                            '<td>' + item.id + '</td>' +
+                            '<td>' + sırano + '</td>' +
                             '<td>' + item.name + '</td>' +
                             '<td>' + item.surname + '</td>' +
                             '<td>' + item.email + '</td>' +
                             '<td>' + item.createdDate + '</td>' +
                             '<td>' +
                                 '<button type="button" class="btn btn-primary" id="edit" data-id="' + item.id + '">Düzenle</button>' +
-                                '<button type="button" class="btn btn-danger" id="delete" data-id="' + item.id + '">Sil</button>' +
+                                '<button type="button" class="btn btn-danger ml-2" id="delete" data-id="' + item.id + '">Sil</button>' +
                             '</td>' +
                         '</tr>'
                     );
+                    sırano++;
                 });
             } 
         },
@@ -146,8 +212,4 @@ function listele () {
 
 };
 
-$('.btn-edit').click(function() {
-    var id = $(this).data('id');
-    // Düzenleme işlemi için gerekli kodları buraya ekleyebilirsiniz
-    console.log('Düzenle butonuna tıklandı, id:', id);
 });
