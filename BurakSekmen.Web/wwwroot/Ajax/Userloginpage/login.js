@@ -69,6 +69,7 @@
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("email", response.data.email);
                     localStorage.setItem("username", response.data.userName);
+                    localStorage.setItem("roles", response.data.roles);
                 },
                 error: function (xhr, status, error) {
                     var errorMessages;

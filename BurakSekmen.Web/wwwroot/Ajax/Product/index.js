@@ -61,14 +61,14 @@ $(document).ready(function () {
    
         $.ajax({
             type: "DELETE",
-            url: baseurl + "/api/Category/"+id, 
+            url: baseurl + "/api/product/"+id, 
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + token
             },
             async: true,
             success: function (response) {
-                if (response.statusCode == 201) {
+                if (response.statusCode == 200) {
                     iziToast.success({
                         title: 'Success',
                         message: "Veri başarılı bir şekilde silindi.",
@@ -176,32 +176,37 @@ function listele () {
     // AJAX isteği
     $.ajax({
         type: "GET",
-        url: baseurl+"/api/Category", // Bu URL'yi kendi controller'ınızın URL'siyle değiştirin
+        url: baseurl+"/api/Product/GetCategoryAndFeatures", // Bu URL'yi kendi controller'ınızın URL'siyle değiştirin
         contentType: "application/json",
         headers: {
          
             "Authorization": "Bearer " + token
         },
         success: function (response) {
-            if (response.statusCode = 200) {
-               var sırano = 1;
-                $.each(response.data, function(index, item) {
-                    $('#veri').append(
-                        '<tr>' +
-                            '<td>' + sırano + '</td>' +
-                            '<td>' + item.name + '</td>' +
-                            '<td>' + item.description + '</td>' +
-                            '<td>' + item.createdDate + '</td>' +
-                            '<td>' +
-                                '<button type="button" class="btn btn-primary" id="edit" data-id="' + item.id + '">Düzenle</button>' +
-                                '<button type="button" class="btn btn-danger ml-2" id="delete" data-id="' + item.id + '">Sil</button>' +
-                                '<button type="button" class="btn btn-dark ml-2" id="Detail" data-id="' + item.id + '">Ürünlere Git</button>' +
-                            '</td>' +
-                        '</tr>'
-                    );
-                    sırano++;
-                });
-            } 
+            if (response) {
+                console.log(response);
+                var sırano = 1;
+                 $.each(response, function(index, item) {
+                     $('#veri').append(
+                         '<tr>' +
+                             '<td>' + sırano + '</td>' +
+                             '<td>' + item.name + '</td>' +
+                             '<td>' + item.description + '</td>' +
+                             '<td>' + item.price + '</td>' +
+                             '<td>' + item.createdDate + '</td>' +
+                             '<td>' + item.category.name + '</td>' +
+                             '<td>' +
+                                 '<button type="button" class="btn btn-primary" id="edit" data-id="' + item.id + '">Düzenle</button>' +
+                                 '<button type="button" class="btn btn-danger ml-2" id="delete" data-id="' + item.id + '">Sil</button>' +
+                                 
+                             '</td>' +
+                         '</tr>'
+                     );
+                     sırano++;
+                 });
+            }
+               
+             
         },
         error: function(xhr, status, error) {
             console.error('Sunucu hatası:', error);

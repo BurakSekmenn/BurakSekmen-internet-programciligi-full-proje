@@ -17,6 +17,7 @@ namespace BurakSekmen.API.Controllers
         private readonly IProductService _productService;
         private readonly IProductFeatureService _productFeatureService;
         private readonly ICategoryService _categoryService;
+        private readonly IResponseService _responseService;
 
 
         public ProductController(IMapper mapper, IProductService productService, IProductFeatureService productFeatureService, ICategoryService categoryService)
@@ -37,7 +38,7 @@ namespace BurakSekmen.API.Controllers
         {
             var products = await _productService.GetCategoryAndFeatures(false, i => i.productFeature, x => x.Category);
             return Ok(products);
-       
+
         }
         [HttpGet("GetProductWithCategoryAndFeature/{id}")]
         public async Task<IActionResult> GetProductWithCategoryAndFeature(int id)
@@ -101,7 +102,7 @@ namespace BurakSekmen.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var product = _productService.GetByIdAsync(id).Result;
             _productService.RemoveAsync(product);

@@ -13,19 +13,19 @@ $(document).ready(function () {
 
     $('#addForm').submit(function (e) {
         e.preventDefault();
-        var tokenuser = localStorage.getItem("username");
-        var categoryDto = {
-            name : $('#name').val(),
-            description : $('#description').val(),
-            createdDate : $('#createdDate').val(),
-            recordingName : tokenuser
+       
+        var taxDto = {
+            renk: $('#renk').val(),
+            height : $('#height').val(),
+            width : $('#width').val(),
+            createddate : $('#createdDate').val(),
             
         };
         $.ajax({
             type: "Post",
-            url: "https://localhost:7175/api/Category/SaveCategory/",
+            url: baseurl+"/api/Tax",
+            data: JSON.stringify(taxDto),
             contentType: "application/json",
-            data: JSON.stringify(categoryDto),
             headers: {
                 "Authorization": "Bearer " + token
             },
@@ -61,14 +61,13 @@ $(document).ready(function () {
    
         $.ajax({
             type: "DELETE",
-            url: baseurl + "/api/Category/"+id, 
+            url: baseurl + "/api/Tax/"+id, 
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + token
             },
-            async: true,
             success: function (response) {
-                if (response.statusCode == 201) {
+                if (response.statusCode == 200) {
                     iziToast.success({
                         title: 'Success',
                         message: "Veri başarılı bir şekilde silindi.",
@@ -97,7 +96,7 @@ $(document).ready(function () {
         $('#editPersonModal').show();
         $.ajax({
             type: "Get",
-            url: baseurl+"/api/Category/"+id,
+            url: baseurl+"/api/tax/"+id,
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + token
@@ -105,16 +104,26 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.statusCode == 200) {
-                    console.log(response.data);
                     $('#editId').val(response.data.id);
-                    $('#editname').val(response.data.name);                    
+                    $('#edittaxName').val(response.data.taxName);
+                    $('#editrate').val(response.data.rate);
+                    $('#editprice').val(response.data.price);
+                    $('#editpaymetDate').val(response.data.paymetDate);
+                    $('#editdescription').val(response.data.description);
+                    var fullDate = response.data.paymetDate;
+                    var dateOnly = fullDate.split('T')[0];
+                    
+                    $('#editpaymetDate').val(dateOnly);
                     $('#editdescription').val(response.data.description);
             
                     // Aynı işlemi diğer tarih alanı için yap
-                    var joinFullDate = response.data.createdDate;
+                    var joinFullDate = response.data.joinDate;
                     var joinDateOnly = joinFullDate.split('T')[0];
                     
-                    $('#editcreateDate').val(joinDateOnly);
+                    $('#editJoinDate').val(joinDateOnly);
+                   
+
+                    
                 }              
                 console.log(response);            
             },
@@ -130,18 +139,19 @@ $(document).ready(function () {
 
     $('#editPersonForm').submit(function(e) {
         e.preventDefault();
-        var tokenuser = localStorage.getItem("username");
-        var categoryDto = {
-            id: $('#editId').val(),
-            name: $('#editname').val(),
+  
+        var taxDto = {
+           id: $('#editId').val(),
+            taxName: $('#edittaxName').val(),
+            rate: $('#editrate').val(),
+            price: $('#editprice').val(),
+            paymetDate: $('#editpaymetDate').val(),
             description: $('#editdescription').val(),
-            createdDate: $('#editcreateDate').val(),
-            recordingName : tokenuser
         };
         $.ajax({
             type: "Put",
-            url: baseurl+"/api/Category/",
-            data: JSON.stringify(categoryDto),
+            url: baseurl+"/api/Tax/",
+            data: JSON.stringify(taxDto),
             contentType: "application/json",
             headers: {
                 "Authorization": "Bearer " + token
@@ -176,7 +186,7 @@ function listele () {
     // AJAX isteği
     $.ajax({
         type: "GET",
-        url: baseurl+"/api/Category", // Bu URL'yi kendi controller'ınızın URL'siyle değiştirin
+        url: baseurl+"/api/Tax", // Bu URL'yi kendi controller'ınızın URL'siyle değiştirin
         contentType: "application/json",
         headers: {
          
@@ -189,13 +199,14 @@ function listele () {
                     $('#veri').append(
                         '<tr>' +
                             '<td>' + sırano + '</td>' +
-                            '<td>' + item.name + '</td>' +
+                            '<td>' + item.taxName + '</td>' +
+                            '<td>' + item.rate + '</td>' +
+                            '<td>' + item.price + '</td>' +
+                            '<td>' + item.paymetDate + '</td>' +
                             '<td>' + item.description + '</td>' +
-                            '<td>' + item.createdDate + '</td>' +
                             '<td>' +
                                 '<button type="button" class="btn btn-primary" id="edit" data-id="' + item.id + '">Düzenle</button>' +
                                 '<button type="button" class="btn btn-danger ml-2" id="delete" data-id="' + item.id + '">Sil</button>' +
-                                '<button type="button" class="btn btn-dark ml-2" id="Detail" data-id="' + item.id + '">Ürünlere Git</button>' +
                             '</td>' +
                         '</tr>'
                     );

@@ -81,7 +81,7 @@ namespace BurakSekmen.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var category = _categoryService.GetByIdAsync(id).Result;
             _categoryService.RemoveAsync(category);
