@@ -8,5 +8,9 @@ namespace BurakSekmen.Web.Controllers
         {
             return View();
         }
+        public IActionResult AddPerson()
+        {
+            return View();
+        }
     }
 }

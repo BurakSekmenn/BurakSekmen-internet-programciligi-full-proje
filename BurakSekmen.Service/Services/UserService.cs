@@ -55,12 +55,15 @@ namespace BurakSekmen.Service.Services
                     if (!await _roleManager.RoleExistsAsync(Authorization.default_role.ToString()))
                     {
                         var userRole = new IdentityRole(Authorization.default_role.ToString());
-
                         await _roleManager.CreateAsync(userRole);
                     }
                     await _userManager.AddToRoleAsync(user, "User");
+                    return $"User Registered {user.UserName}";
                 }
-                return $"User Registered {user.UserName}";
+                else
+                {
+                    return $"Failed to register user {user.UserName}.";
+                }
             }
             else
             {

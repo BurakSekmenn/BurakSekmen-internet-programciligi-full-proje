@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <script src="~/Ajax/baseajax.js"></script>
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Admintemplate/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/font-awesome/css/all.css"  rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
 
 </head>
@@ -44,11 +45,16 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fa-solid fa-house"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fa-solid fa-person"></i>
+                    <span>Personeller</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -147,7 +153,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <img class="sidebar-card-illustration mb-2"  alt="...">
                 <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
                 <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
@@ -275,7 +281,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle"
                                              alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -289,7 +295,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" 
                                              alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -303,7 +309,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" 
                                              alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -339,9 +345,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span id="username-display" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                                 <img class="img-profile rounded-circle"
-                                     src="img/undraw_profile.svg">
+                                     >
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -412,7 +418,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-primary"  id="logout">Logout</button>
                 </div>
             </div>
         </div>
@@ -430,12 +436,12 @@
     <!-- Custom scripts for all pages-->
     <script src="~/Admintemplate/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="~/Admintemplate/vendor/chart.js/Chart.min.js"></script>
+
     <script type="module" src="~/Ajax/baseajax.js"></script>
-    <!-- Page level custom scripts -->
-    <script src="~/Admintemplate/js/demo/chart-area-demo.js"></script>
-    <script src="~/Admintemplate/js/demo/chart-pie-demo.js"></script>
+
+    <script type="module" src="~/Ajax/Admin/index.js"></script>
+ 
+  
 
 </body>
 

@@ -1,4 +1,5 @@
-﻿using BurakSekmen.Core.Entity;
+﻿using Azure;
+using BurakSekmen.Core.Entity;
 using BurakSekmen.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +15,7 @@ namespace BurakSekmen.API.Controllers
         private readonly IUserService _userService;
         private readonly IResponseService _responseService;
 
+        public Response Response { get; set; }
         public UserController(IUserService userService, IResponseService responseService)
         {
             _userService = userService;
@@ -26,23 +28,29 @@ namespace BurakSekmen.API.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                return BadRequest(_responseService.HandleError(errors.ToString()));
+                return BadRequest(_responseService.HandleError(string.Join(", ", errors)));
             }
 
             var result = await _userService.RegisterAsync(register);
-            if (result == null) // Kayıt işlemi başarısızsa
+            if (result.StartsWith("User Registered"))
             {
-                return BadRequest(_responseService.HandleError(result));
+                return Ok(_responseService.HandleSuccess("Kullanıcı başarıyla eklendi!"));
             }
-
-            return Ok(_responseService.HandleSuccess("Kullanıcı Başarıyla Eklendi!"));
+            else
+            {
+                return BadRequest(new { errors = new List<string> { result } });
+            }
         }
 
         [HttpPost("token")]
         public async Task<IActionResult> GetTokenAsync(Token model)
         {
             var result = await _userService.GetTokenAsync(model);
-            return Ok(result);
+            if (result == null  || !result.IsAuthenticated)
+            {
+                return BadRequest(_responseService.HandleError("Kullanıcı Adı veya Şifre Hatalı!"));
+            }
+            return Ok(_responseService.HandleSuccessData("Giriş Başarılı", result));
         }
 
         [HttpPost("addrole")]
