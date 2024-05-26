@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_admin.cshtml";
+}
+<style>
+ 
+</style>
+<div class="row mb-3">
+    <div class="col-md-4">
+        <button id="addBtn" class="btn btn-dark">Yeni Fatura Ekle</button>
+    </div>
+</div>
+
+<div class="row">
+    <table class="table table-dark" width="100%">
+        <tr>
+            <th>Id</th>
+            <th>Gider Adı </th>
+            <th>Oranı</th>
+            <th>Fiyat </th>
+            <th>Ödeme Tarihi </th>
+            <th>Açıklama</th>
+            <th>İşlemler</th>
+        <tr />
+        <tbody id="veri" class="bg-white" style="color : black">
+        </tbody>
+    </table>
+</div>
+@* Ekeleme Mödülü *@
+<div id="addModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modalContent">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Yeni Fatura  Ekleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="taxName">Vergi Türü  :</label>
+                                <input type="text" class="form-control" id="taxName" name="taxName" required>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="rate">Oran :</label>
+                                <input type="text" class="form-control" id="rate" name="rate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="price">Fiyat :</label>
+                                <input type="text" class="form-control" id="price" name="price" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="paymetDate">Ödeme Tarihi :</label>
+                                <input type="date" class="form-control" id="paymetDate" name="paymetDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Açıklama :</label>
+                                <input type="text" class="form-control" id="description" name="description" required>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="editPersonModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Ödeme Güncelleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPersonForm">
+                    <input type="hidden" id="editId" name="id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="edittaxName">Vergi Türü  :</label>
+                                <input type="text" class="form-control" id="edittaxName" name="edittaxName" required>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editrate">Oran :</label>
+                                <input type="text" class="form-control" id="editrate" name="editrate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editprice">Fiyat :</label>
+                                <input type="text" class="form-control" id="editprice" name="editprice" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editpaymetDate">Ödeme Tarihi :</label>
+                                <input type="date" class="form-control" id="editpaymetDate" name="editpaymetDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editdescription">Açıklama :</label>
+                                <input type="text" class="form-control" id="editdescription" name="editdescription" required>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="~/Ajax/Tax/index.js"></script>

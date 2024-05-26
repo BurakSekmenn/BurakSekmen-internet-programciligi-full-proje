@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_admin.cshtml";
+}
+<div class="row mb-3">
+    <div class="col-md-4">
+        <button id="addBtn" class="btn btn-dark">Yeni Kategori Ekle</button>
+    </div>
+
+</div>
+<div class="row">
+    <table class="table table-dark" width="100%">
+        <tr>
+            <th>Id</th>
+            <th>Kategori Adı </th>
+            <th>Kategori Açıklama</th>
+            <th>Kayıt Tarihi</th>
+            <th>İşlemler</th>
+        <tr/>
+        <tbody id="veri" class="bg-white" style="color : black">
+        </tbody>
+    </table>
+</div>
+@* Ekeleme Mödülü *@
+<div id="addModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Yeni Kategori Ekleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="form-group">
+                        <label for="name">Kategori Adı :</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Kategori Açıklama :</label>
+                        <input type="text" class="form-control" id="description" name="description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="createDate">Oluşturulma Tarihi</label>
+                        <input type="date" class="form-control" id="createDate" name="createDate" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="editPersonModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Kişi Güncelleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPersonForm">
+                    <input type="hidden" id="editId" name="id">
+                    <div class="form-group">
+                        <label for="editname">Kategori Adı :</label>
+                        <input type="text" class="form-control" id="editname" name="editname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editdescription">Kategori Açıklama :</label>
+                        <input type="text" class="form-control" id="editdescription" name="editdescription" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editcreateDate">Oluşturulma Tarihi</label>
+                        <input type="date" class="form-control" id="editcreateDate" name="editcreateDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="~/Ajax/Kategori/index.js"></script>
+

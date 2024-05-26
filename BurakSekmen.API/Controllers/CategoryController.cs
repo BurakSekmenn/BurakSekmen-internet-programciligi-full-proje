@@ -47,12 +47,29 @@ namespace BurakSekmen.API.Controllers
         }
 
         [HttpPost]
+        [Route("SaveCategory")]
         public async Task<IActionResult> Save(CategoryDto categoryDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             categoryDto.RecordingName = username;
-            var category = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
-            return CreateActionResult(CustomeResponseDto<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200));
+            categoryDto.CreatedDate = DateTime.Now;
+
+            try
+            {
+                var category = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
+                return CreateActionResult(CustomeResponseDto<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200));
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPut]
