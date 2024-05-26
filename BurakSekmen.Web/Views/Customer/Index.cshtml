@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_admin.cshtml";
+}
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <button id="addBtn" class="btn btn-dark">Yeni Müşteri Ekle</button>
+    </div>
+
+</div>
+
+<div class="row">
+    <table class="table table-dark" width="100%">
+        <tr>
+            <th>Id</th>
+            <th>Ulaşılacak Kişi Adı </th>
+            <th>Şirket Adı </th>
+            <th>Adresi </th>
+            <th>İlçe</th>
+            <th>İl</th>
+            <th>Telefon</th>
+            <th>Notları</th>
+            <th>Üyelik Tarihi</th>
+            <th>İşlemler</th>
+        <tr />
+        <tbody id="veri" class="bg-white" style="color : black">
+        </tbody>
+    </table>
+</div>
+@* Ekeleme Mödülü *@
+<div id="addModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Yeni Personel Ekleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contactName">Ulaşılacak Kişi Adı :</label>
+                                <input type="text" class="form-control" id="contactName" name="contactName" required>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="companyName">Şirket Adı :</label>
+                                <input type="text" class="form-control" id="companyName" name="companyName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="address">Şirket Adresi :</label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="city">İl Adı :</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="country">İlçe Adı :</label>
+                                <input type="tel" class="form-control" id="country" name="country" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="phone">Telefon Numarası:</label>
+                                <input type="number" class="form-control" id="phone" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="nots">Not :</label>
+                                <input type="text" class="form-control" id="nots" name="nots" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                        <div class="form-group">
+                                <label for="createdDate">Üye Tarihi:</label>
+                                <input type="date" class="form-control" id="createdDate" name="createdDate" required>
+                        </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="editPersonModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Kişi Güncelleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPersonForm">
+                    <input type="text" id="editId" name="id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editcontactName">Ulaşılacak Kişi Adı :</label>
+                                <input type="text" class="form-control" id="editcontactName" name="editcontactName" required>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editcompanyName">Şirket Adı :</label>
+                                <input type="text" class="form-control" id="editcompanyName" name="editcompanyName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editaddress">Şirket Adresi :</label>
+                                <input type="text" class="form-control" id="editaddress" name="editaddress" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editcity">İl Adı :</label>
+                                <input type="text" class="form-control" id="editcity" name="editcity" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editcountry">İlçe Adı :</label>
+                                <input type="tel" class="form-control" id="editcountry" name="editcountry" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editphone">Telefon Numarası:</label>
+                                <input type="number" class="form-control" id="editphone" name="editphone" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editnots">Not :</label>
+                                <input type="text" class="form-control" id="editnots" name="editnots" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="editcreatedDate">Üye Tarihi:</label>
+                                <input type="date" class="form-control" id="editcreatedDate" name="editcreatedDate" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="~/Ajax/Customer/index.js"></script>
+

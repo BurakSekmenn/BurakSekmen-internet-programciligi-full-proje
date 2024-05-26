@@ -37,6 +37,14 @@ namespace BurakSekmen.API.Controllers
             return CreateActionResult(CustomeResponseDto<CustomerDto>.Success(_mapper.Map<CustomerDto>(newCustomer), 200));
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var person = await _customerService.GetByIdAsync(id);
+            var personDto = _mapper.Map<CustomerDto>(person);
+            return CreateActionResult(CustomeResponseDto<CustomerDto>.Success(personDto, 200));
+        }
+
         [HttpPut]
         public async Task<IActionResult> Update(CustomerDto customerDto)
         {
